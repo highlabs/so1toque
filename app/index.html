@@ -16,7 +16,7 @@
     <script src="assets/components/modernizr/modernizr.js"></script>
     <script src="https://cdn.firebase.com/js/client/2.4.1/firebase.js"></script>
   </head>
-  <body>
+  <body class="home">
 
 
     <div class="sitewrapper">
@@ -32,9 +32,13 @@
         <main class="column main" role="main">
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
           <form class="toque-form">
-            <input type="text" class="toque-twitter" name="twitter" value="" placeholder="@ do seu amigo">
-            <textarea name="name" class="toque-message" rows="8" cols="40" maxlength="140" placeholder="Dê um toque para seu amigo"></textarea>
-            <button type="button" class="js-toque-send" name="button">Enviar</button>
+            <p class="control">
+              <input type="text" class="toque-twitter" name="twitter" value="" placeholder="@ do seu amigo">
+            </p>
+            <p class="control">
+              <textarea name="name" class="toque-message" rows="8" cols="40" maxlength="140" placeholder="Dê um toque para seu amigo"></textarea>
+            </p>
+            <button type="submit" class="button is-primary js-toque-send" name="button">Enviar</button>
           </form>
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -48,6 +52,7 @@
     </footer> -->
 
     <script src="assets/components/jquery/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
     <script src="assets/js/scripts.min.js"></script>
 
     <!-- Twitter button -->

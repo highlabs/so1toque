@@ -391,8 +391,10 @@ header {
 .intro-text {
   font-size: 1.3em; }
 
-.nav ul {
-  list-style: none; }
+nav {
+  padding: 10px 0; }
+  nav .hide {
+    display: none; }
 
 main {
   margin-left: 3rem; }

@@ -4,33 +4,57 @@
 
   var ref = new Firebase('https://so1toque.firebaseio.com/');
   var messages = new Firebase('https://so1toque.firebaseio.com/messages');
+
   function sendToque(){
 
-    $('.js-toque-send').on('click', function(e){
-      e.preventDefault();
+    $('.toque-form').on('submit', function(){
       var fire = ref.child('messages');
-      var toqueArroba = $('.toque-twitter').val();
-      var toqueText = $('.toque-message').val();
+      $('.toque-form').find('.js-toque-send').addClass('is-loading').attr('disabled', true);
+      var toqueArroba = $('.toque-twitter').val().toString();
+      var toqueText = $('.toque-message').val().toString();
 
-      fire.push({
-        tweetLink: toqueArroba,
-        text: toqueText,
+      var message = fire.push();
+      message.set({
+        "tweetLink": toqueArroba,
+        "text": toqueText,
       });
+
+      $('.toque-form').find('.js-toque-send').removeClass('is-loading').prop('disabled', false);
+      return false;
     });
   }
 
-  // Create a callback to handle the result of the authentication
+  function isAuth(){
+    var authData = ref.getAuth();
+    if (authData) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  function adminInit() {
+    $('.login-navbar').removeClass('hide');
+    $('.logout-navbar').removeClass('hide');
+    if (isAuth()) {
+      listTweets();
+      $('.login-navbar').addClass('hide');
+    } else {
+      $('.logout-navbar').addClass('hide');
+    }
+  }
+
   function authHandler(error, authData) {
     if (error) {
       console.log('Login Failed!', error);
     } else {
       console.log('Authenticated successfully with payload:', authData);
+      adminInit();
     }
   }
 
   function login(){
-    $('.js-admin-login').on('click', function(e){
-      e.preventDefault();
+    $('.toque-login').on('submit', function(){
       var login = $('.login').val();
       var password = $('.password').val();
 
@@ -38,16 +62,20 @@
         email    : login,
         password : password
       }, authHandler);
+      return false;
     });
 
-    $('.js-admin-logout').on('click', function(e){
+    $('.toque-logout').on('submit', function(e){
       e.preventDefault();
       ref.unauth();
+      adminInit();
+      $('#tweetList').html('');
+      return false;
     });
   }
 
   function register(){
-    $('.js-admin-register').on('click', function(e){
+    $('.toque-register').on('submit', function(e){
       e.preventDefault();
       var login = $('.register').val();
       var password = $('.register-password').val();
@@ -55,54 +83,93 @@
       ref.createUser({
         email    : login,
         password : password
-      }, function(error) {
+      }, function(error,authData) {
         if (error) {
-          console.log('Error creating user:', error);
+          console.log('Error creating user');
         } else {
-          console.log('success');
-        }
-      });
-
-      ref.onAuth(function(authData) {
-        if (authData) {
           ref.child('users').child(authData.uid).set({
-            provider: authData.provider,
-            email: authData.password.email
+            email: login
           });
         }
       });
-
+      return false;
     });
   }
 
-  function isAuth(){
-    var authData = ref.getAuth();
-    if (authData) {
-      console.log('Authenticated user with uid:', authData.uid);
-      listTweets();
-    } else {
-      console.log('not logged');
-    }
+
+
+  function handleTemplate(data){
+    var source = $('#list-tweets').html();
+    var template = Handlebars.compile(source);
+    var html = template(data);
+    $('#tweetList').html(html);
   }
 
   function listTweets() {
     var listArr = [];
     messages.on('child_added', function(snapshot) {
       var list = snapshot.val();
-      listArr.push(list);      
-      console.log(listArr);
-      var source = $("#list-tweets").html();
-      var template = Handlebars.compile(source);
-      var html = template(listArr);
-      $('#tweetList').html(html);
+      listArr.push(list);
+      handleTemplate(listArr);
     });
+    // messages.on('child_removed', function(snapshot) {
+    //   var list = snapshot.val();
+    //   listArr.push(list);
+    //   handleTemplate([list]);
+    // });
   }
 
+  var umToque;
+  var UTIL = {
+
+    fire : function(func,funcname, args){
+
+      var namespace = umToque;  // indicate your obj literal namespace here
+
+      funcname = (funcname === undefined) ? 'init' : funcname;
+      if (func !== '' && namespace[func] && typeof namespace[func][funcname] === 'function'){
+        namespace[func][funcname](args);
+      }
+
+    },
+
+    loadEvents : function(){
+
+      var bodyId = document.body.id;
+
+      // hit up common first.
+      UTIL.fire('common');
+
+      // do all the classes too.
+      $.each(document.body.className.split(/\s+/),function(i,classnm){
+        UTIL.fire(classnm);
+        UTIL.fire(classnm,bodyId);
+      });
+
+      UTIL.fire('common','finalize');
+
+    }
+
+  };
+
+
   $(function () {
-    sendToque();
-    login();
-    register();
-    isAuth();
+    $(document).ready(UTIL.loadEvents);
+    umToque = {
+      home : {
+        init     : function(){
+          sendToque();
+        }
+      },
+      admin : {
+        init     : function(){
+          adminInit();
+          login();
+          register();
+          isAuth();
+        }
+      }
+    }
   });
 
 })(jQuery, window, document);

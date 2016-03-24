@@ -17,36 +17,37 @@
     <script src="https://cdn.firebase.com/js/client/2.4.1/firebase.js"></script>
   </head>
   <body class="admin">
-
-    <div class="columns container is-fluid" role="main">
-      <h3>login</h3>
-      <form class="column toque-login">
-        <p class="control">
-          <label class="label" for="login">Login</label>
-          <input type="text" class="login" name="login" value="">
-        </p>
-        <p class="control">
-          <label class="label" for="pass">Password</label>
-          <input type="password" class="password" name="pass" value="">
-        </p>
-        <button type="button" class="js-admin-login button is-primary" name="button">Login</button>
-      </form>
-
-      <h3>register</h3>
-      <form class="column toque-register">
-        <p class="control">
-          <label class="label" for="register">Email</label>
-          <input type="text" class="register" name="register" value="">
-        </p>
-        <p class="control">
-          <label class="label" for="pass-register">Password</label>
-          <input type="password" class="register-password" name="pass-register" value="">
-        </p>
-        <button type="button" class="js-admin-register button is-primary" name="button">Register</button>
-      </form>
-      <div class="column">
-        <button type="button" class="js-admin-logout button is-danger" name="button">Logout</button>
+    <!-- Main container -->
+    <nav class="navbar container">
+      <div class="navbar-left">
+        <div class="navbar-item">
+          <p class="subtitle is-5">
+            Apenas 1 Toque - Admin
+          </p>
+        </div>
       </div>
+      <div class="navbar-right">
+        <div class="navbar-item login-navbar">
+          <form class="toque-login">
+            <p class="control is-grouped">
+              <label class="label hide" for="login">Login</label>
+              <input type="text" class="login" name="login" placeholder="Login">
+              <label class="label hide" for="pass">Password</label>
+              <input type="password" class="password" name="pass" placeholder="password" >
+              <button type="submit" class="js-admin-login button is-primary" name="button">Login</button>
+            </p>
+          </form>
+        </div>
+        <div class="navbar-item logout-navbar">
+          <form class="toque-logout">
+            <p class="control">
+              <button type="submit" class="js-admin-logout button is-danger" name="button">Logout</button>
+            </p>
+          </form>
+        </div>
+      </div>
+    </nav>
+    <div class="columns container is-fluid" role="main">
 
     </div>
 
@@ -97,3 +98,22 @@
 
   </body>
 </html>
+
+
+      <!-- <h3>register</h3>
+      <form class="column toque-register">
+        <p class="control">
+          <label class="label" for="register">Email</label>
+          <input type="text" class="register" name="register" value="">
+        </p>
+        <p class="control">
+          <label class="label" for="pass-register">Password</label>
+          <input type="password" class="register-password" name="pass-register" value="">
+        </p>
+        <button type="button" class="js-admin-register button is-primary" name="button">Register</button>
+      </form>
+      <div class="column">
+        <form class="toque-logout">
+          <button type="submit" class="js-admin-logout button is-danger" name="button">Logout</button>
+        </form>
+      </div> -->
