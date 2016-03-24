@@ -1,7 +1,15 @@
-main {
+.main {
   margin-left: 3rem;
-}
+  padding-left: 4rem;
+  font-size: 1.7rem;
+  // border-left: 1px black solid;
 
-.sitewrapper {
-  padding: 10em 20em 20em;
+  h2.title {
+    font-weight: bold;
+    margin-bottom: 0;
+  }
+
+  .toque-form {
+    padding-top: 5rem;
+  }
 }

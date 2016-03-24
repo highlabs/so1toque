@@ -16,13 +16,12 @@ html {
   font-size: 62.5%; }
 
 body {
-  font: 300 13px/1.6 'Helvetica Neue', Helvetica, Arial;
+  font: 300 13px/1.6 Lato, 'Helvetica Neue', Helvetica, Arial;
   color: #444;
-  transition: all .4s .3s ease-in; }
+  background-color: #64b0d5; }
 
 body, html {
-  min-height: 100vh;
-  overflow: hidden; }
+  height: 100vh; }
 
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 /**
@@ -379,6 +378,9 @@ td,
 th {
   padding: 0; }
 
+.container {
+  padding-top: 10em; }
+
 header {
   max-width: 300px; }
 
@@ -395,11 +397,15 @@ header {
 .nav ul {
   list-style: none; }
 
-main {
-  margin-left: 3rem; }
-
-.sitewrapper {
-  padding: 10em 20em 20em; }
+.main {
+  margin-left: 3rem;
+  padding-left: 4rem;
+  font-size: 1.7rem; }
+  .main h2.title {
+    font-weight: bold;
+    margin-bottom: 0; }
+  .main .toque-form {
+    padding-top: 5rem; }
 
 @font-face {
   font-family: 'Font-Name';
