@@ -1,10 +1,16 @@
-.header {
-
+header {
+  max-width: 300px;
 }
-.logo {
-  margin: -58px 0 0 -100px;
-  @include position(absolute, 50% 0 0 50%);
-  img {
 
-  }
+.logo {
+  border-radius: 50%;
+}
+
+.tagline {
+  margin-top: 0;
+  font-weight: bold;
+}
+
+.intro-text {
+  font-size: 1.3em;
 }
