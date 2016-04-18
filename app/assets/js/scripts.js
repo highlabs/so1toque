@@ -104,8 +104,6 @@
     });
   }
 
-
-
   function handleTemplate(data){
     var source = $('#list-tweets').html();
     var template = Handlebars.compile(source);
@@ -116,15 +114,56 @@
   function listTweets() {
     var listArr = [];
     messages.on('child_added', function(snapshot) {
+      $('#tweetList').html('');
       var list = snapshot.val();
+      var key = snapshot.key();
       listArr.push(list);
+      // console.log(list);
+      list.id = key;
       handleTemplate(listArr);
     });
-    // messages.on('child_removed', function(snapshot) {
-    //   var list = snapshot.val();
-    //   listArr.push(list);
-    //   handleTemplate([list]);
-    // });
+    messages.on('child_removed', function(snapshot) {
+      var key = snapshot.key();
+      $('[data-key='+key+']').closest('.media').fadeOut();
+    });
+  }
+
+  function acceptTweet(){
+    $(document).on('click', '.js-toque-accept', function(){
+      var url = $(this).data('url');
+      var text = $(this).data('text');
+      var key = $(this).data('key');
+
+      var statusUrlTest = new RegExp('/^(?:https?:\/\/)?(?:www\.)?twitter\.com\/(#!\/)?[a-zA-Z0-9_]+$/i');
+
+      if (!statusUrlTest.test(url)) {
+        console.log('narf');
+        // return false;
+      }
+
+      var data = {
+        "text": text,
+        "url": url
+      };
+
+      $.ajax({
+        url: 'https://whispering-ridge-55853.herokuapp.com/update',
+        type: 'POST',
+        data: data,
+      })
+      .done(function(status) {
+        console.log(status);
+      });
+
+      messages.child(key).remove();
+    });
+  }
+
+  function declineTweet(){
+    $(document).on('click', '.js-toque-decline', function(){
+      var key = $(this).data('key');
+      messages.child(key).remove();
+    });
   }
 
   var umToque;
@@ -175,6 +214,8 @@
           login();
           register();
           isAuth();
+          declineTweet();
+          acceptTweet();
         }
       }
     }

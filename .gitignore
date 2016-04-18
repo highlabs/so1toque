@@ -24,3 +24,10 @@ Network Trash Folder
 Temporary Items
 .apdisk
 node_modules
+
+#Heroku Stuff
+
+./heroku-app/.git/*
+./heroku-app/.env
+./heroku-app/config.js
+./heroku-app/node_modules

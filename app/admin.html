@@ -67,7 +67,7 @@
     <script id="list-tweets" type="text/x-handlebars-template">
       {{#each this}}
 
-       <article class="media">
+        <article class="media media-id-{{@index}}">
         <div class="media-content">
           <div class="content">
             <p>
@@ -75,6 +75,18 @@
               <br>
               {{text}}
             </p>
+            <nav class="navbar">
+              <div class="navbar-left">
+                <div class="navbar-item">
+                  <a class="button is-danger js-toque-decline" data-url="{{tweetLink}}" data-text="{{text}}" data-media=".media-id-{{@index}}" data-key="{{id}}">Decline</a>
+                </div>
+              </div>
+              <div class="navbar-right">
+                <div class="navbar-item">
+                  <a class="button is-info js-toque-accept" data-url="{{tweetLink}}" data-text="{{text}}" data-media=".media-id-{{@index}}" data-key="{{id}}">Accept</a>
+                </div>
+              </div>
+            </nav>
           </div>
         </div>
       </article>
