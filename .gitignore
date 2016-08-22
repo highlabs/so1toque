@@ -31,3 +31,14 @@ node_modules
 ./heroku-app/.env
 ./heroku-app/config.js
 ./heroku-app/node_modules
+
+# Vue stuff
+
+.DS_Store
+node_modules/
+dist/
+npm-debug.log
+selenium-debug.log
+test/unit/coverage
+test/e2e/reports
+src/config.js
